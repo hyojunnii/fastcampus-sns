@@ -1,5 +1,4 @@
 package com.fastcampus.sns.model.entity;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -46,9 +45,14 @@ public class PostEntity {
     }
 
     @PreUpdate
-    void updatedAt() {
-        this.updatedAt = Timestamp.from(Instant.now());
-    }
+    void updatedAt() { this.updatedAt = Timestamp.from(Instant.now()); }
 
+    public static PostEntity of(String title, String body, UserEntity userEntity) {
+        PostEntity entity = new PostEntity();
+        entity.setTitle(title);
+        entity.setBody(body);
+        entity.setUser(userEntity);
+        return entity;
+    }
 
 }
